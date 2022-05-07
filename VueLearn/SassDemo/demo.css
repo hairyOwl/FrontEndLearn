@@ -1,0 +1,28 @@
+@charset "UTF-8";
+/* .header{
+    font-size : 12px;
+    span {
+        color: red;
+        // & 等价为外层的span
+        &:active{
+            color: green;
+        };
+        &:hover{
+            color: pink;
+        }
+    }
+} */
+.title {
+  color: #666666;
+  font-size: 17px;
+  font-family: "Microsoft YaHei";
+}
+
+.subtitle {
+  color: black;
+}
+
+.text {
+  color: #333;
+}
+/*# sourceMappingURL=demo.css.map */

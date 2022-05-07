@@ -1,0 +1,34 @@
+// 基础语法
+/* .header{
+    font-size : 12px;
+    span {
+        color: red;
+        // & 等价为外层的span
+        &:active{
+            color: green;
+        };
+        &:hover{
+            color: pink;
+        }
+    }
+} */
+
+// 变量
+$text-color: #333; //颜色
+$text-size: 14px + 3 ; //字体大小
+$default-font : 'Microsoft YaHei'; //默认字体
+
+.title{
+    color: lighten($text-color,20%); //变浅20%
+    font-size: $text-size;
+    font-family: $default-font;
+}
+.subtitle{
+    color: darken( $text-color, 20%); //加深20%
+    
+}
+.text{
+    color: $text-color;
+}
+
+
