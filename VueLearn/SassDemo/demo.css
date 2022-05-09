@@ -12,17 +12,28 @@
         }
     }
 } */
-.title {
-  color: #666666;
-  font-size: 17px;
-  font-family: "Microsoft YaHei";
+/* $text-color: #333; //颜色
+$text-size: 14px + 3 ; //字体大小
+$default-font : 'Microsoft YaHei'; //默认字体
+
+.title{
+    color: lighten($text-color,20%); //变浅20%
+    font-size: $text-size;
+    font-family: $default-font;
+}
+.subtitle{
+    color: darken( $text-color, 20%); //加深20%
+    
+}
+.text{
+    color: $text-color;
+} */
+.header {
+  color: red;
+  font-size: 12px;
 }
 
-.subtitle {
-  color: black;
-}
-
-.text {
-  color: #333;
+.content {
+  color: orange;
 }
 /*# sourceMappingURL=demo.css.map */

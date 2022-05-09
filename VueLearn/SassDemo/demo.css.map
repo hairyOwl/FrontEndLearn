@@ -1,8 +1,9 @@
 {
     "version": 3,
-    "mappings": ";AACA;;;;;;;;;;;;IAYI;AAOJ,AAAA,MAAM,CAAA;EACF,KAAK,EAAE,OAAwB;EAC/B,SAAS,EALD,IAAQ;EAMhB,WAAW,EALC,iBAAiB;CAMhC;;AACD,AAAA,SAAS,CAAA;EACL,KAAK,EAAE,KAAyB;CAEnC;;AACD,AAAA,KAAK,CAAA;EACD,KAAK,EAdI,IAAI;CAehB",
+    "mappings": ";AACA;;;;;;;;;;;;IAYI;AAIJ;;;;;;;;;;;;;;;IAeI;AAiBJ,AAAA,OAAO,CAAA;EACH,KAAK,ECjDI,GAAG;EDkDZ,SAAS,EChDA,IAAI;CDiDhB;;AAED,AAAA,QAAQ,CAAA;EACJ,KAAK,ECrDO,MAAM;CDsDrB",
     "sources": [
-        "demo.scss"
+        "demo.scss",
+        "_viriables.scss"
     ],
     "names": [],
     "file": "demo.css"

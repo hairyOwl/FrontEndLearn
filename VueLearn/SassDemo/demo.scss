@@ -13,8 +13,9 @@
     }
 } */
 
+
 // 变量
-$text-color: #333; //颜色
+/* $text-color: #333; //颜色
 $text-size: 14px + 3 ; //字体大小
 $default-font : 'Microsoft YaHei'; //默认字体
 
@@ -29,6 +30,28 @@ $default-font : 'Microsoft YaHei'; //默认字体
 }
 .text{
     color: $text-color;
+} */
+
+
+//嵌套
+// div{
+//     span{
+//         color: blue;
+
+//         a{
+//             color: red;
+//         }
+//     }
+// }
+
+
+// 引用
+@import './_viriables.scss';
+.header{
+    color: $head-color;
+    font-size: $font-size;
 }
 
-
+.content{
+    color: $content-color;
+}
