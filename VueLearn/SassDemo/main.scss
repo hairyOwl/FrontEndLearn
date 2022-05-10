@@ -1,0 +1,86 @@
+// 基础语法
+/* .header{
+    font-size : 12px;
+    span {
+        color: red;
+        // & 等价为外层的span
+        &:active{
+            color: green;
+        };
+        &:hover{
+            color: pink;
+        }
+    }
+} */
+
+
+// 变量
+/* $text-color: #333; //颜色
+$text-size: 14px + 3 ; //字体大小
+$default-font : 'Microsoft YaHei'; //默认字体
+
+.title{
+    color: lighten($text-color,20%); //变浅20%
+    font-size: $text-size;
+    font-family: $default-font;
+}
+.subtitle{
+    color: darken( $text-color, 20%); //加深20%
+    
+}
+.text{
+    color: $text-color;
+} */
+
+
+//嵌套
+/* div{
+    span{
+        color: blue;
+
+        a{
+            color: red;
+        }
+    }
+} */
+
+
+// 引用 入口文件
+/* @import 'viriables'; //@import './_viriables.scss';
+@import 'header';
+@import 'content'; */
+
+//Mixin 混入
+/* @import 'mixins';
+.text{
+    //文字多出部分省略
+    @include single-line-ellipsis(600px);
+}
+
+.content-text{
+    //文字多出部分省略
+    @include single-line-ellipsis(1000px);
+} */
+
+//媒体查询与Mixin
+@mixin pad($min-width) {
+    @media screen and(min-width: $min-width){
+        @content;
+    }
+}
+
+.header{
+    width: 1000px;
+    @include pad(768px){
+        width: 500px;
+        font-size: 18px;
+    }
+}
+
+.footer{
+    color: red;
+    @include pad(1024px){
+        color: aqua;
+    }
+}
+

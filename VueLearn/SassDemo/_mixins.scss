@@ -1,0 +1,7 @@
+//文本显示为单行超出省略号 
+@mixin single-line-ellipsis($width) {
+    width: $width ;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}

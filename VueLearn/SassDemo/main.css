@@ -1,0 +1,73 @@
+@charset "UTF-8";
+/* .header{
+    font-size : 12px;
+    span {
+        color: red;
+        // & 等价为外层的span
+        &:active{
+            color: green;
+        };
+        &:hover{
+            color: pink;
+        }
+    }
+} */
+/* $text-color: #333; //颜色
+$text-size: 14px + 3 ; //字体大小
+$default-font : 'Microsoft YaHei'; //默认字体
+
+.title{
+    color: lighten($text-color,20%); //变浅20%
+    font-size: $text-size;
+    font-family: $default-font;
+}
+.subtitle{
+    color: darken( $text-color, 20%); //加深20%
+    
+}
+.text{
+    color: $text-color;
+} */
+/* div{
+    span{
+        color: blue;
+
+        a{
+            color: red;
+        }
+    }
+} */
+/* @import 'viriables'; //@import './_viriables.scss';
+@import 'header';
+@import 'content'; */
+/* @import 'mixins';
+.text{
+    //文字多出部分省略
+    @include single-line-ellipsis(600px);
+}
+
+.content-text{
+    //文字多出部分省略
+    @include single-line-ellipsis(1000px);
+} */
+.header {
+  width: 1000px;
+}
+
+@media screen and (min-width: 768px) {
+  .header {
+    width: 500px;
+    font-size: 18px;
+  }
+}
+
+.footer {
+  color: red;
+}
+
+@media screen and (min-width: 1024px) {
+  .footer {
+    color: aqua;
+  }
+}
+/*# sourceMappingURL=main.css.map */
