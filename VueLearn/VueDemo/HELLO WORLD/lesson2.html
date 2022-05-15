@@ -1,0 +1,68 @@
+<!--
+ * @Description: 字符串反转 展示或隐藏元素
+ * @Author: hairyOwl
+ * @Date: 2022-05-12 15:11:31
+ * @LastEditors: hairyOwl
+ * @LastEditTime: 2022-05-12 15:44:32
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>lesson2</title>
+    <script src="https://unpkg.com/vue@next"></script>
+</head>
+<body>
+    <div id="root"></div>
+</body>
+<script>
+    //字符串反转
+    /* Vue.createApp({
+        data(){
+            
+            return{
+                content : 'hello world',
+            }
+        },
+        methods: {
+            //反转字符串
+            handleBtnClick(){
+                //字符串分割为字符数组，数组反转函数，然后合并为字串
+                const newContent = this.content.split('').reverse().join('');
+                this.content = newContent;
+            }
+        },
+        template: `
+            <div>
+                {{ content }}
+                <button v-on:click="handleBtnClick"> 反转 </button>
+            </div>
+        `
+    }).mount('#root'); */
+
+    //展示或隐藏元素
+    Vue.createApp({
+        data(){
+            
+            return{
+                show : true,
+                content : 'hello world',
+            }
+        },
+        methods: {
+            //反转字符串
+            handleBtnClick(){
+                this.show = !(this.show);
+            }
+        },
+        template: `
+            <div>
+                <span v-if="show"> {{ content }} </span>
+                <button v-on:click="handleBtnClick"> 显示或隐藏 </button>
+            </div>
+        `
+    }).mount('#root');
+</script>
+</html>

@@ -1,0 +1,65 @@
+<!--
+ * @Description: 组件概念
+ * @Author: hairyOwl
+ * @Date: 2022-05-15 09:47:56
+ * @LastEditors: hairyOwl
+ * @LastEditTime: 2022-05-15 10:40:28
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>componentLearn</title>
+    <script src="https://unpkg.com/vue@next"></script>
+</head>
+<body>
+    <div id="root"></div>
+    <span></span>
+</body>
+<script>
+    //v-for="(item , index) of list" 循环体
+    const app = Vue.createApp({
+        data(){
+            return{
+                inputValue:'',
+                list :[],
+            }
+        },
+        methods: {
+            //添加 
+            handleAddItem(){
+                this.list.push(this.inputValue);
+                this.inputValue = ''; //清空输入框
+            }
+        },
+        template:`
+            <div>
+                <ul>
+                <todo-item 
+                    v-for="(item,index) of list" 
+                    v-bind:content=item
+                    v-bind:index=index
+                /> 
+                </ul>    
+            </div>
+
+            <input v-model="inputValue"/> &nbsp;
+            <button 
+                v-on:click="handleAddItem"
+                v-bind:title = "inputValue"
+            >
+            添加
+            </button>
+        `,
+    })
+    // 注册todoList组件
+    app.component('todo-item',{
+        props: ['content','index'],
+        template : '<li>{{ index }} -- {{ content }} </li>'
+    });
+    //实例挂载到指定位置
+    app.mount('#root');
+</script>
+</html>

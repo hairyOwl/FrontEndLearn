@@ -1,0 +1,41 @@
+<!--
+ * @Description: Vue的 hello world
+ * @Author: hairyOwl
+ * @Date: 2022-05-12 10:05:07
+ * @LastEditors: hairyOwl
+ * @LastEditTime: 2022-05-12 11:05:55
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>hello world</title>
+    <!-- 引用Vue -->
+    <script src="https://unpkg.com/vue@next"></script>
+
+</head>
+<body>
+    <div id="root"></div>
+</body>
+<script>
+    // 创建一个Vue实例
+    Vue.createApp({
+        data(){
+            return{
+                content : 12 ,//定义变量
+            }
+        },
+        //挂载后 自动执行的函数
+        mounted(){
+            //定时器+1
+            setInterval(()=>{
+                this.content +=1 //this.$data.content
+            },1000)
+        },
+        // 页面模板
+        template: '<div>hello world! <br> {{content}}</div>' //使用变量
+    }).mount('#root'); //指定使用区块
+</script>
+</html>
