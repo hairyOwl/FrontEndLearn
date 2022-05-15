@@ -1,0 +1,38 @@
+<!--
+ * @Description: 应用和组件的基础概念
+ * @Author: hairyOwl
+ * @Date: 2022-05-15 20:30:33
+ * @LastEditors: hairyOwl
+ * @LastEditTime: 2022-05-15 20:48:11
+-->
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>应用和组件</title>
+    <script src="https://unpkg.com/vue@next"></script>
+</head>
+<body>
+    <div id="root"></div>
+</body>
+<script>
+    //createApp 创建一个Vue的应用
+    //createApp({})传入的参数表示，这个应用最外层的组件，应该如何展示
+    const app = Vue.createApp({
+        //数据层
+        data(){
+            return{
+                message : 'hello world!' ,//定义变量
+            }
+        },
+        
+        // 视图层 页面模板
+        template: '<div> {{message}}</div>' //使用变量
+    });
+
+    //视图数据连接层; vm 代表的就是vue应用的根组件
+    const vm = app.mount('#root');
+</script>
+</html>
