@@ -3,7 +3,7 @@
  * @Author: hairyOwl
  * @Date: 2022-05-16 09:35:59
  * @LastEditors: hairyOwl
- * @LastEditTime: 2022-05-17 10:59:10
+ * @LastEditTime: 2022-05-17 15:54:09
 -->
 <!DOCTYPE html>
 <html lang="en">
@@ -39,11 +39,27 @@
         //判断是否有 template 有则将template转换为 render 函数
         //在template已经被编译render成函数之后立即执行
         beforeMount(){
-            console.log('beforeMount');
+            console.log(document.getElementById('root').innerHTML ,'beforeMount');
         },
         // 在组件内容被渲染到页面之后
         mounted(){
-            console.log('mounted');
+            console.log(document.getElementById('root').innerHTML,'mounted');
+        },
+        //数据发生变化时
+        beforeUpdate(){
+            console.log(document.getElementById('root').innerHTML,'beforeUpdate');
+        },
+        //数据发生变化，页面重新渲染后
+        updated(){
+            console.log(document.getElementById('root').innerHTML,'updated');
+        },
+        //vue应用失效时
+        beforeUnmount(){
+            console.log(document.getElementById('root').innerHTML,'beforeUnmount');
+        },
+        //vue应用失效，且dom完全销毁
+        unmounted(){
+            console.log(document.getElementById('root').innerHTML,'unmounted');
         },
         // 视图层 页面模板
         template: "<div> {{message}} </div>" //使用变量
