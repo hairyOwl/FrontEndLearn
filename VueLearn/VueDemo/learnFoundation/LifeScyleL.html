@@ -1,0 +1,55 @@
+<!--
+ * @Description: 生命周期 1
+ * @Author: hairyOwl
+ * @Date: 2022-05-16 09:35:59
+ * @LastEditors: hairyOwl
+ * @LastEditTime: 2022-05-17 10:59:10
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>生命周期函数</title>
+    <script src="https://unpkg.com/vue@next"></script>
+</head>
+<body>
+    <div id="root"></div>
+</body>
+<script> 
+    //生命周期函数 在某一时刻会自动执行的函数
+    const app = Vue.createApp({
+        //数据层
+        data(){
+            
+            return{
+                message : 'hello world!' ,//定义变量
+            }
+
+        },
+        //实例创建之前
+        beforeCreate(){
+            console.log('beforeCreate');
+        },
+        //实例生成后
+        created(){
+            console.log('created');
+        },
+        //判断是否有 template 有则将template转换为 render 函数
+        //在template已经被编译render成函数之后立即执行
+        beforeMount(){
+            console.log('beforeMount');
+        },
+        // 在组件内容被渲染到页面之后
+        mounted(){
+            console.log('mounted');
+        },
+        // 视图层 页面模板
+        template: "<div> {{message}} </div>" //使用变量
+    });
+
+    //视图数据连接层; vm 代表的就是vue应用的根组件
+    const vm = app.mount('#root');
+</script>
+</html>
