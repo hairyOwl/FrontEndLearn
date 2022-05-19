@@ -3,7 +3,7 @@
  * @Author: hairyOwl
  * @Date: 2022-05-17 16:23:42
  * @LastEditors: hairyOwl
- * @LastEditTime: 2022-05-17 16:23:54
+ * @LastEditTime: 2022-05-19 15:31:24
 -->
 <!DOCTYPE html>
 <html lang="en">
@@ -12,8 +12,59 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>模板语法</title>
+    <script src="https://unpkg.com/vue@next"></script>
 </head>
 <body>
-    
+    <div id="root"></div>
 </body>
+<script>
+    const app = Vue.createApp({
+        //数据层
+        data(){
+            return{
+                message : `hello world!` ,//定义变量
+                disable : false,
+                show : true,
+                name : 'title',
+                event : 'click'
+            }
+        },
+        methods: {
+            handleClick(e){
+                console.log(2);
+            }
+        },
+        // 视图层 页面模板
+        template: `
+            <form 
+                action = "https://www.baidu.com"
+                @click.prevent = "handleClick"
+            >
+                <button type="submit"> 提交</button>
+            </form>
+        ` //使用变量
+
+        /* 
+        //插值表达式
+        <div>{{ message }}</div>
+        <div> {{ message+Math.max(1,2) }}</div>
+        //通过html的方式展示变量
+        <div v-html=message></div>
+        //属性使用绑定的变量
+        <div v-bind:title=message> {{ message }}</div>
+        <input v-bind:disabled="disable"/>
+        //只使用一次变量
+        <div v-once> {{ message }}</div>
+        //是否渲染  
+        <div v-if="show"> {{ message }}</div>
+        //绑定事件
+        <div v-on:click="handleClick"> {{ message }}</div>
+        //动态属性和事件
+        <div :[name]="message" @[event]="handleClick" >{{ message }}</div>
+        */
+    });
+
+    //视图数据连接层; vm 代表的就是vue应用的根组件
+    const vm = app.mount('#root');
+</script>
 </html>
