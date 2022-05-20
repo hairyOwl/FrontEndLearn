@@ -1,0 +1,84 @@
+<!--
+ * @Description: 数据,方法,计算属性和监听器
+ * @Author: hairyOwl
+ * @Date: 2022-05-19 16:32:04
+ * @LastEditors: hairyOwl
+ * @LastEditTime: 2022-05-20 17:09:23
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>数据,方法,计算属性和监听器</title>
+    <script src="https://unpkg.com/vue@next"></script>
+</head>
+<body>
+    <div id="root"></div>
+</body>
+<script> 
+    //生命周期函数 在某一时刻会自动执行的函数
+    const app = Vue.createApp({
+        //数据
+        data(){
+            return{
+                message : 'Hello World!' ,//定义变量
+                count : 3,
+                price : 5,
+                newTotal : 15,
+            }
+        },
+        //监听器 异步的清空
+        watch: {
+            //监听变量price的变化 price发生变化时，函数会实现。
+            price(current , prev){
+                console.log(prev , current);
+                this.newTotal = current * this.count;
+                // setTimeout(()=>{
+                //     console.log('price change '+this.price);
+                // },3000);
+            }
+        },
+
+        //计算属性   当计算属性依赖的内容发生变更时，才会重新执行计算
+        computed: {
+            total(){
+                // return this.count * this.price;
+                return Date.now()+" "+(this.count * this.price);
+            }
+        },
+        //方法
+        methods: {
+            handleClick() {
+                console.log('click',this.message); //this指向vue示例
+            },
+            /* handleClick: ()=> {
+                console.log('click',this.message); //undefined
+            } */
+            formatString(str){
+                return str.toUpperCase();
+            },
+            //只有页面重新渲染，才会重新计算
+            getTotal(){
+                // return this.count * this.price;
+                return Date.now()+" "+(this.count * this.price);
+
+            },
+        },
+        // 视图层 页面模板
+        template: `
+            <div> 
+                {{ message }} {{ total}} {{ getTotal() }} {{ newTotal }}
+            </div>
+        ` //使用变量
+
+        /* 
+            <div @click="handleClick">  {{ formatString(message) }} </div>
+        */
+    });
+
+    //视图数据连接层; vm 代表的就是vue应用的根组件
+    const vm = app.mount('#root');
+</script>
+</html>
