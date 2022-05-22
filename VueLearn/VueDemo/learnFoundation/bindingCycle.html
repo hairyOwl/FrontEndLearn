@@ -1,0 +1,75 @@
+<!--
+ * @Description: 样式绑定 条件渲染 列表循环
+ * @Author: hairyOwl
+ * @Date: 2022-05-22 22:02:11
+ * @LastEditors: hairyOwl
+ * @LastEditTime: 2022-05-22 22:54:09
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>样式绑定 条件渲染 列表循环</title>
+    <!-- 样式 -->
+    <style>
+        .red{
+            color: red;
+        }
+        .blue{
+            color: blue;
+        }
+    </style>
+    <script src="https://unpkg.com/vue@next"></script>
+</head>
+<body>
+    <div id="root"></div>
+</body>
+<script>
+    //createApp 创建一个Vue的应用
+    //约定 主动调用的为父主件 ， 被动调用的为子组件
+    const app = Vue.createApp({
+        data(){
+            return{
+                // 样式变量可以是 字符串 对象 数组(可包含对象)
+                classString : 'red',
+                classObject : { red:false, blue:true },
+                classArray : ['red','blue',{ brown:false }],
+                // 行内样式
+                styleString : 'color: aqua',
+                styleObject : {
+                    color: 'orange',
+                    background : 'black',
+                },
+            }
+        },
+
+        // 视图层 页面模板
+        template: `
+            <div :style="styleObject">
+                Hi Lee
+            </div>
+        ` 
+
+        /* 
+            // 组件样式调用
+            <div v-bind:class="classString">
+                Hi Lee
+                <demo class="blue"/>
+            </div>
+        */
+    });
+
+    // 组件
+    app.component('demo',{
+        template: `
+            <div :class="$attrs.class">one</div>
+            <div >two</div>
+        `
+    });
+
+    //视图数据连接层; vm 代表的就是vue应用的根组件
+    const vm = app.mount('#root');
+</script>
+</html>
