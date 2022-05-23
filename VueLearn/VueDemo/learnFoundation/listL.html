@@ -1,9 +1,9 @@
 <!--
- * @Description: 条件渲染
+ * @Description: 列表循环
  * @Author: hairyOwl
- * @Date: 2022-05-23 10:28:23
+ * @Date: 2022-05-23 14:34:35
  * @LastEditors: hairyOwl
- * @LastEditTime: 2022-05-23 14:35:44
+ * @LastEditTime: 2022-05-23 14:35:37
 -->
 <!DOCTYPE html>
 <html lang="en">
@@ -11,35 +11,25 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>条件渲染</title>
+    <title>列表循环</title>
     <script src="https://unpkg.com/vue@next"></script>
 </head>
 <body>
     <div id="root"></div>
 </body>
 <script>
-    // v-if 为false是直接移除这个dom节点
-    // v-show 不显示是通过style样式隐藏 display:none
-    // 频繁修改  使用v-show比较好 因为不会经常销毁性能好
     const app = Vue.createApp({
         data(){
             return{
-                show : true,
-                conditionOne : false,
-                conditionTwo : true,
+            
             }
         },
 
         // 视图层 页面模板
         template: `
-            <div v-if="show"> Hi Lee </div>
-            <div v-show="show"> Hello </div>
-            <div v-if="conditionOne"> if </div>
-            <div v-else-if="conditionTwo"> elseif </div>
-            <div v-else> else </div>
+            <div> Hi Lee </div>
         ` 
     });
-
     //视图数据连接层; vm 代表的就是vue应用的根组件
     const vm = app.mount('#root');
 </script>
