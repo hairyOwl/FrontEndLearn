@@ -1,0 +1,32 @@
+<!--
+ * @Description: 组件的定义及复用性，局部组件和全局组件
+ * @Author: hairyOwl
+ * @Date: 2022-05-24 16:26:02
+ * @LastEditors: hairyOwl
+ * @LastEditTime: 2022-05-24 16:55:48
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>局部组件和全局组件</title>
+    <script src="https://unpkg.com/vue@next"></script>
+</head>
+<body>
+    <div id="root"></div>
+</body>
+<script>
+    // 创建Vue的应用 ({})这个对象确定根组件的构成
+    const app = Vue.createApp({
+        template : `
+        <div>
+            hello world
+        </div>
+        `
+    });
+
+    const vm = app.mount('#root');
+</script>
+</html>

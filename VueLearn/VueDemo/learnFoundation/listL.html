@@ -3,7 +3,7 @@
  * @Author: hairyOwl
  * @Date: 2022-05-23 14:34:35
  * @LastEditors: hairyOwl
- * @LastEditTime: 2022-05-23 14:35:37
+ * @LastEditTime: 2022-05-24 16:17:58
 -->
 <!DOCTYPE html>
 <html lang="en">
@@ -21,14 +21,87 @@
     const app = Vue.createApp({
         data(){
             return{
-            
+                listArray : ['apple','banana','orange'],
+                listObject :{
+                    name : 'lee',
+                    age : '22',
+                    job : 'chief',
+                }, 
             }
         },
+        methods: {
+            handleAddBtnClick(){
+                //1.使用数组的变更函数 push pop shift unshift splice sort reverse
+                // this.listArray.push(new Date()); //向后添加
+                // this.listArray.pop(); //从后往前 移出
+                // this.listArray.shift(); //从前往后 移出
+                // this.listArray.unshift(new Date()); //向前添加
+                // this.listArray.reverse(); //反转数组
 
+                 // 2. 直接替换数组
+                // this.listArray = ['bye', 'world']
+                // this.listArray = ['bye', 'world'].filter(item => item === 'bye');
+                // this.listArray = ['bye', 'world'].filter(item => item.length > 2);
+
+                // 3. 直接更新数组的内容
+                // this.listArray[1] = 'hello'
+
+                // 直接添加对象的内容，也可以自动的展示出来
+                // this.listObject.age = 100;
+                // this.listObject.job = 'cook';
+
+            }
+        },
         // 视图层 页面模板
         template: `
-            <div> Hi Lee </div>
+        <div>
+            <template
+                v-for="(value, key, index) in listObject"
+                :key="index"
+            >
+            <div v-if="key !== 'name'">
+                {{value}} -- {{key}}
+            </div>
+            </template>
+            <div v-for="item in 5">{{item}}</div>
+            <button @click="handleAddBtnClick">新增</button>
+        </div>
+
         ` 
+
+        /* 
+        //数组
+        <div v-for="(item,index) in listArray">
+            {{index}} -- {{item}}    
+        </div>
+        //对象
+        <div v-for="(value,key,index) in listObject">
+            {{ index }} :  {{ key }} -- {{ value }}    
+        </div>
+        
+        //改变数组列表
+        <div>
+            <div v-for="(item,index) in listArray">
+                {{index}} -- {{item}}    
+            </div>
+            <button @click="handleAddBtnClick">新增</button>
+        </div>        
+        //改变对象列表
+        <div>
+            <template
+                v-for="(value, key, index) in listObject"
+                :key="index"
+            >
+            //隐藏对象
+            <div v-if="key !== 'name'">
+                {{value}} -- {{key}}
+            </div>
+            </template>
+            //数字列表
+            <div v-for="item in 10">{{item}}</div>
+            <button @click="handleAddBtnClick">新增</button>
+        </div>
+        */
     });
     //视图数据连接层; vm 代表的就是vue应用的根组件
     const vm = app.mount('#root');
