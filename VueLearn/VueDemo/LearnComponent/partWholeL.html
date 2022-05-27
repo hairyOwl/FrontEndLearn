@@ -3,7 +3,7 @@
  * @Author: hairyOwl
  * @Date: 2022-05-24 16:26:02
  * @LastEditors: hairyOwl
- * @LastEditTime: 2022-05-24 16:55:48
+ * @LastEditTime: 2022-05-26 23:02:26
 -->
 <!DOCTYPE html>
 <html lang="en">
@@ -18,14 +18,51 @@
     <div id="root"></div>
 </body>
 <script>
-    // 创建Vue的应用 ({})这个对象确定根组件的构成
+    // 组件的定义 组件具有复用性
+    //全局组件 只要定义了，处处可以使用。性能不高，但便于使用 命名小写字母横杠分割
+    //局部组件，定义了，要注册之后才能使用，性能比较高 ，需要声明才可以使用 命名驼峰
+    // 局部组件
+    const Counter ={
+        data(){
+            return{
+                count : 1,
+            }
+        },
+        template : `<div @click="count += 1"> {{ count }} </div>`
+    }
+    const HelloWorld = {
+        template : `<div> hello world </div>`
+    }
+
     const app = Vue.createApp({
+        components:{
+            counter : Counter, //可以简写为counter,
+            HelloWorld, //引用时 自动映射为hello-world
+        },
         template : `
         <div>
-            hello world
+            <hello-world />
+            <counter />
+            <hello-world />
         </div>
         `
     });
+
+    // 全局组件 定义组件
+    //组件的中转
+    /* app.component('counter-parent',{
+        template : `<counter />`
+    });
+
+    app.component('counter',{
+        data(){
+            return{
+                count : 1,
+            }
+        },
+        template : `<div @click="count += 1"> {{ count }} </div>`
+    }); */
+
 
     const vm = app.mount('#root');
 </script>
