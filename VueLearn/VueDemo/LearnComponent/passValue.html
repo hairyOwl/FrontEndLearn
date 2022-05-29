@@ -3,7 +3,7 @@
  * @Author: hairyOwl
  * @Date: 2022-05-27 16:08:13
  * @LastEditors: hairyOwl
- * @LastEditTime: 2022-05-27 16:23:08
+ * @LastEditTime: 2022-05-28 10:50:49
 -->
 <!DOCTYPE html>
 <html lang="en">
@@ -21,13 +21,38 @@
 <script>
     //此时app是父组件 test是子组件
     const app = Vue.createApp({
-        template : `<div> <test content="hello world"/> </div>`
+        data() {
+            return {
+                num : 1110,
+                fn : () =>{alert(123)},
+            }
+        },
+
+        template : `<div> <test :content="num"/> </div>`
     });
 
-    // 全局组件
+    // type : String,Boolean,Array,Object,Function,Symbol
+    // required 是都必传
+    // default 默认参数 可以是具体值或者函数
+    // validator 验证器
     app.component('test',{
-        props: ['content'],
-        template : `<div>test</div>`
+        // props: ['content'],
+        props: {
+            // content : Function, //类型校验 
+            content : {
+                type : Number,
+                validator : function(val){
+                    return val < 1000;
+                },
+                // default : 888,
+                default: function(){
+                    return 888;
+                },
+                // required : true,
+            }
+        },
+        template : `<div> {{ typeof content }} {{ content }}</div>`
+        // template : `<div @click="content()">请点击</div>`
     })
 
     const vm = app.mount('#root');
