@@ -1,0 +1,35 @@
+<!--
+ * @Description: Non-Props
+ * @Author: hairyOwl
+ * @Date: 2022-05-29 16:41:30
+ * @LastEditors: hairyOwl
+ * @LastEditTime: 2022-05-29 16:46:29
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Non-Props </title>
+    <script src="https://unpkg.com/vue@next"></script>
+</head>
+<body>
+    <div id="root"></div>
+</body>
+<script>
+    //Non-Props 属性 父组件向子组件传值，子组件不接收
+    const app = Vue.createApp({
+        template : `<div>
+            <counter msg="hello"/> 
+        </div>`
+    });
+
+    app.component('counter',{
+        
+        template : `<div > Counter </div>`
+    });
+
+    const vm = app.mount('#root');
+</script>
+</html>

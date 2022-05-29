@@ -3,7 +3,7 @@
  * @Author: hairyOwl
  * @Date: 2022-05-29 14:33:40
  * @LastEditors: hairyOwl
- * @LastEditTime: 2022-05-29 14:33:44
+ * @LastEditTime: 2022-05-29 15:29:48
 -->
 <!DOCTYPE html>
 <html lang="en">
@@ -12,8 +12,50 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>单项数据流</title>
+    <script src="https://unpkg.com/vue@next"></script>
 </head>
 <body>
-    
+    <div id="root"></div>
 </body>
+<script>
+    const app = Vue.createApp({
+        data() {
+            return {
+                numObj : {
+                    num : 1110,
+                    a : 123,
+                    b : 234,
+                    c : 345,
+                },
+                num1:123,
+                num2:1,
+            }
+        },
+        //多个数据传值 v-bind="numObj" 等价于 :num="numObj.num" :a="numObj.a" :b="numObj.b" :c="numObj.c"
+        // template : `<div> <test v-bind="numObj" /> </div>`
+        //属性传的时候，使用 content-abc这种命名。取值的时候用驼峰
+        // template : `<div> <test :content-num = "num1" /> </div>`
+        // 单向数据流 : 子组件对与父组件的传值 可以使用不能修改
+        template : `<div> <counter :count="num2"/> </div>`
+    });
+
+    app.component('test',{
+        // props: ['num','a','b','c'],
+        // template : `<div> {{ num }}-{{ a }}-{{ b }}-{{ c }}</div>`
+        props: ['contentNum'],
+        template : `<div> {{ contentNum }}</div>`
+    });
+
+    app.component('counter',{
+        props: ['count'],
+        data(){
+            return {
+                myCount : this.count,
+            }
+        },
+        template : `<div @click= "myCount += 1"> 请点击 {{ myCount }}</div>`
+    });
+
+    const vm = app.mount('#root');
+</script>
 </html>
