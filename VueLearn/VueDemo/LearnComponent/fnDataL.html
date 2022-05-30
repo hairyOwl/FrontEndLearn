@@ -1,0 +1,105 @@
+<!--
+ * @Description: 通过事件进行通信
+ * @Author: hairyOwl
+ * @Date: 2022-05-30 09:46:27
+ * @LastEditors: hairyOwl
+ * @LastEditTime: 2022-05-30 10:31:54
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>通过事件进行通信</title>
+    <script src="https://unpkg.com/vue@next"></script>
+
+</head>
+<body>
+    <div id="root"></div>
+</body>
+
+<script>
+    const app = Vue.createApp({
+        data() {
+            return {
+                count : 1,
+            }
+        },
+        methods:{
+            // handleAddOne(){
+            //     this.count += 1;
+            // },
+            // handleAdd(step,step2){
+            //     this.count += step2;
+            // },
+            handleAdd(count){
+                this.count = count;
+            }
+        },
+        template : `
+        <div>
+            <counter :count = "count" @add="handleAdd"/> 
+        </div>`
+
+        /* 
+            //无参事件 通过事件进行通信
+            <counter :count = "count" @add-one="handleAddOne"/> 
+            //有参事件 通过事件进行通信
+            <counter :count = "count" @add="handleAdd"/> 
+        */
+    });
+
+    app.component('counter',{
+        props: ['count'],
+        // emits: ['add'], //当前组件会向外触发那些事件，为声明但触发会有警报
+        emits : {  //触发参数校验
+            add : (count) =>{
+                if(count > 0){
+                    return true;
+                }else{
+                    return false;
+                }
+            }
+        },
+        methods: {
+            handleItemClick(){
+                //子组件告诉父组件，让父组件修改参数具体实现 子组件触发事件，父组件监听事件并作对应修改
+                // this.$emit('addOne');
+                // this.$emit('add',2,3); //含参参数
+                this.$emit('add',this.count - 3); //直接计算
+            }
+        },
+        template : `
+            <div @click="handleItemClick"> 请点击 {{ count }} </div>
+        `
+    });
+    const vm = app.mount('#root');
+
+</script>
+
+
+
+<!-- 通过事件进行通信类比v-model -->
+<!-- <script>
+    const app = Vue.createApp({
+        data() {
+            return { count : 1 }
+        },
+        template : `<counter v-model:myCount="count"/>`
+    });
+
+    app.component('counter',{
+        props: ['myCount'], // 当 v-model="count"是固定为 modelValue 表示v-model对应双向绑定的数据
+        methods: {
+            handleItemClick(){
+                this.$emit('update:myCount',this.myCount + 3); //触发事件名称规定update:变量名/modelValue
+            }
+        },
+        template : `
+            <div @click="handleItemClick"> 请点击 {{ myCount }} </div>
+        `
+    });
+    const vm = app.mount('#root');
+</script> -->
+</html>

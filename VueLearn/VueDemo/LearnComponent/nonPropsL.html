@@ -3,7 +3,7 @@
  * @Author: hairyOwl
  * @Date: 2022-05-29 16:41:30
  * @LastEditors: hairyOwl
- * @LastEditTime: 2022-05-29 16:46:29
+ * @LastEditTime: 2022-05-29 17:05:31
 -->
 <!DOCTYPE html>
 <html lang="en">
@@ -18,18 +18,28 @@
     <div id="root"></div>
 </body>
 <script>
-    //Non-Props 属性 父组件向子组件传值，子组件不接收
+    //Non-Props特性：当父组件向子组件传值，子组件不接收时。父组件传递的内容会变成子组件最外层dom节点的一个属性，多个根节点时不生效
+    //适用场景 组件样式的有无需求
     const app = Vue.createApp({
-        template : `<div>
-            <counter msg="hello"/> 
+        template : `
+        <div>
+            <counter msg="hello" altMsg="Alt"/> 
         </div>`
     });
 
+    //多个根节点中对某个节点生效 <div v-bind="$attrs"> Counter </div> 
+    // $attrs 父组件的所有Non-Props属性
     app.component('counter',{
-        
-        template : `<div > Counter </div>`
+        // inheritAttrs : false, //不继承父组件所有Non-Props属性
+        mounted(){
+            console.log(this.$attrs); //Proxy {msg: 'hello', altMsg: 'Alt', __vInternal: 1}
+        },
+        template : `
+            <div :msg="$attrs.msg"> Counter </div>
+            <div :="$attrs"> Counter </div> 
+            <div > Counter </div>
+        `
     });
-
     const vm = app.mount('#root');
 </script>
 </html>
