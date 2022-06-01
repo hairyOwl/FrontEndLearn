@@ -1,0 +1,84 @@
+<!--
+ * @Description: 组件间数据双向绑定
+ * @Author: hairyOwl
+ * @Date: 2022-05-31 10:30:05
+ * @LastEditors: hairyOwl
+ * @LastEditTime: 2022-06-01 16:24:33
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>组件间数据双向绑定</title>
+    <script src="https://unpkg.com/vue@next"></script>
+
+</head>
+<body>
+    <div id="root"></div>
+</body>
+<script>
+    const app = Vue.createApp({
+        data() {
+            return { 
+                count : 'a',
+                // num : 1,
+            }
+        },
+        // methods:{
+        //     handleChangeNum(n){
+        //         this.num = n;
+        //     }
+        // },
+        template : `
+            <counter  v-model.uppercase="count"/>
+        `
+        /* 
+            // 不指定名字的v-model
+            <counter 
+            v-model="count" 
+            :num="num" 
+            @change-num="handleChangeNum"
+            />
+            // 指定名字的v-model
+            <counter  v-model:count="count" v-model:num="num" />
+            //自定义修饰符 字符串大写
+            <counter  v-model.uppercase="count"/>
+        */
+    });
+
+    app.component('counter',{
+        // props: ['count','num'], // 当 v-model="count"是固定为 modelValue 表示v-model对应双向绑定的数据
+        props: {
+            'modelValue' : String,
+            'modelModifiers' : { //修饰符
+                default : () =>({})
+            }
+        },
+        methods: {
+            handleItemClick(){
+                // this.$emit('update:count',this.count + 3); //触发事件名称规定update:变量名/modelValue
+                let newValue = this.modelValue + 'b';
+                if(this.modelModifiers.uppercase){
+                    newValue = newValue.toUpperCase()
+                }
+                this.$emit('update:modelValue',newValue); //触发事件名称规定update:变量名/modelValue
+            },
+            /* handleItemClick1(){
+                // this.$emit('changeNum',this.num + 1); //@change-num="handleChangeNum" 触发事件名称规定update:变量名/modelValue
+                this.$emit('update:num',this.num + 1); 
+            } */
+        },
+        template : `
+            <div @click="handleItemClick"> 请点击 {{ modelValue }} </div>
+        `
+        /* 
+            //多个v-model
+            <div @click="handleItemClick1"> 请点击 {{ num }} </div>
+        
+        */
+    });
+    const vm = app.mount('#root');
+</script>
+</html>
