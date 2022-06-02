@@ -1,0 +1,99 @@
+<!--
+ * @Description: 插槽和具名插槽 解决组件内容传递问题
+ * @Author: hairyOwl
+ * @Date: 2022-06-02 10:37:37
+ * @LastEditors: hairyOwl
+ * @LastEditTime: 2022-06-02 17:28:15
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>插槽和具名插槽</title>
+    <script src="https://unpkg.com/vue@next"></script>
+
+</head>
+<body>
+    <div id="root"></div>
+</body>
+<script>
+    //slot 插槽
+    // slot中的数据作用域的问题
+    // 父模板里调用的数据属性，使用的都是父模板里的数据
+    // 子模板里调用的数据属性，使用的都是子模板里的数据
+    // 具名插槽
+    const app = Vue.createApp({
+        data() {
+            return {
+                text:'提交'
+            }
+        },
+        // slot插入中间位置 slot署名拆成两个部分
+        template : `
+            <layout>
+                <template v-slot:header> 
+                    <div> header </div>
+                </template>
+                <template v-slot:footer> 
+                    <div> footer </div>
+                </template>
+            </layout>
+        `
+
+        /* 
+            //slot 调用，默认值
+            <myForm> 
+                <span>{{ text }}</span>       
+            </myForm>
+            <myForm> 
+                <button>{{ text }}</button>    
+            </myForm>
+            <myForm></myForm>
+        
+        */
+    });
+
+    app.component('layout',{
+        template : `
+            <div> 
+                <slot name="header"></slot>
+                <div> content </div>
+                <slot name="header"></slot>
+            </div>
+        `
+    });
+
+    /* app.component('myForm',{
+        data() {
+            return {
+                text:'子模板text'
+            }
+        },
+
+        methods: {
+            handleClick(){
+                alert('hello');
+            }
+        },
+        template : `
+            <div> 
+                <input />    
+                <span @click="handleClick"> 
+                    <slot> default value<button>按钮</button> </slot> 
+                </span>
+            </div>
+        `
+    });
+
+    app.component('test',{
+        template : `
+            <div>test</div>
+        `
+    }); */
+    const vm = app.mount('#root');
+
+</script>
+
+</html>
