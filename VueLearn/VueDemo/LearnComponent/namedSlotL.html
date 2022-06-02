@@ -3,7 +3,7 @@
  * @Author: hairyOwl
  * @Date: 2022-06-02 10:37:37
  * @LastEditors: hairyOwl
- * @LastEditTime: 2022-06-02 17:28:15
+ * @LastEditTime: 2022-06-02 20:31:37
 -->
 <!DOCTYPE html>
 <html lang="en">
@@ -30,16 +30,11 @@
                 text:'提交'
             }
         },
-        // slot插入中间位置 slot署名拆成两个部分
+        // slotProps 子组件绑定的所有属性在slotProps 解构获取属性
         template : `
-            <layout>
-                <template v-slot:header> 
-                    <div> header </div>
-                </template>
-                <template v-slot:footer> 
-                    <div> footer </div>
-                </template>
-            </layout>
+            <myList v-slot="{item , index}">
+                <div> {{item }} {{index }} </div>    
+            </myList>
         `
 
         /* 
@@ -51,11 +46,41 @@
                 <button>{{ text }}</button>    
             </myForm>
             <myForm></myForm>
-        
+            
+            // slot 署名拆分 slot插入中间位置 slot署名拆成两个部分 v-slot简写为#
+            <layout>
+                <template #header> 
+                    <div> header </div>
+                </template>
+                <template #footer> 
+                    <div> footer </div>
+                </template>
+            </layout>
+
+            //slotProps 子组件绑定的所有属性在slotProps
+            <myList v-slot="slotProps">
+                <div> {{ slotProps.item }} {{ slotProps.index }} </div>    
+            </myList>
         */
     });
 
-    app.component('layout',{
+    app.component('myList',{
+        data() {
+            return {
+                list : [41,51,61],
+            }
+        },
+        template:`
+            <slot v-for ="(item,index) in list" :item="item" :index="index"/>
+        `,
+
+        /* 
+            <div v-for ="item in list "> {{ item }} </div>
+        */
+    });
+
+    
+    /* app.component('layout',{
         template : `
             <div> 
                 <slot name="header"></slot>
@@ -64,8 +89,7 @@
             </div>
         `
     });
-
-    /* app.component('myForm',{
+    app.component('myForm',{
         data() {
             return {
                 text:'子模板text'
