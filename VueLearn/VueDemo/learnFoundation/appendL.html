@@ -1,0 +1,91 @@
+<!--
+ * @Description: 基础知识补充
+ * @Author: hairyOwl
+ * @Date: 2022-06-02 21:26:44
+ * @LastEditors: hairyOwl
+ * @LastEditTime: 2022-06-02 21:57:40
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>基础知识补充</title>
+    <script src="https://unpkg.com/vue@next"></script>
+
+</head>
+<body>
+    <div id="root"></div>
+</body>
+<script>
+    const app = Vue.createApp({
+        data() {
+            return {
+                count:1,
+            }
+        },
+        /* provide : {
+            count : '传给孙子组件',
+        }, */
+        provide(){
+            return {
+                count : this.count,
+            }
+        },
+        /* mounted(){
+            // console.log(this.$refs.count);
+            console.log(this.$refs.common.sayHi());
+        }, */
+        template:`
+            <div>
+                <child :count="count" />
+                <button @click="count += 1">加</button>
+            </div>
+        `,
+
+        /* 
+            // v-once 标签只渲染一次
+            <div @click="count += 1" v-once>
+                请点击  {{ count }}    
+            </div>
+
+            //ref 获取dom节点/ 组件引用 获取到真正的dom节点(前提页面已渲染) (场景1轮播图) 父组件调用子组件的方法
+            <div>
+                <div ref="count">
+                    请点击  {{ count }}    
+                </div>
+            </div>
+            <div>
+                <common-item ref="common"/>
+            </div>
+
+            //provide/ inject 多级组件传值
+        */
+    });
+
+
+    //  父组件  provide 孙子组件inject 数据提供一次性的非双向绑定
+    app.component('child',{
+        template:`<child-child/>`,
+    });
+
+    app.component('child-child',{
+        inject: ['count'],
+        template:`<div>{{ count }}</div>`,
+    });
+
+
+    /* ref 组件引用
+        app.component('common-item',{
+        methods: {
+            sayHi(){
+                alert('hi');
+            }
+        },
+        template:`<div>子组件</div>`,
+    }); */
+
+    const vm = app.mount('#root')
+</script>
+</html>
