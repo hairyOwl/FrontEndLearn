@@ -1,0 +1,87 @@
+<!--
+ * @Description: 动态组件和异步组件
+ * @Author: hairyOwl
+ * @Date: 2022-06-02 20:40:18
+ * @LastEditors: hairyOwl
+ * @LastEditTime: 2022-06-02 21:23:37
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>动态组件和异步组件</title>
+    <script src="https://unpkg.com/vue@next"></script>
+
+</head>
+<body>
+    <div id="root"></div>
+</body>
+<script>
+    // 效果 input-item common-item两个组件互斥
+    // 动态组件 ：根据数据的变换，结合 component 这个标签，随时切换动态组件的显示
+    // 异步组件 : 异步执行某些组件的逻辑
+
+    const app = Vue.createApp({
+        data() {
+            return {
+                currentItem : 'input-item'
+            }
+        },
+        methods: {
+            /* handelClick(){
+                this.currentItem ==='input-item' ? this.currentItem = 'common-item' : this.currentItem = 'input-item';
+            } */
+        },
+        template:`
+            <div>
+                <common-item />    
+                <async-common-item />
+            </div>
+        `,
+
+        /* 
+            //<component :is="currentItem" /> 等同于下面两行
+            <input-item v-show="currentItem === 'input-item' "/>
+            <common-item v-show="currentItem === 'common-item' "/>
+
+            // 动态组件
+            <keep-alive>
+                <component :is="currentItem" />
+            </keep-alive>
+            <button @click="handelClick" >切换</button>
+        */
+    });
+
+
+    app.component('common-item',{
+        template:`<div> 同步组件 </div>`,
+    });
+
+    const AsyncCommonItem = Vue.defineAsyncComponent(() =>{
+        return new Promise((resolve,reject)=>{
+            setTimeout(() => {
+                resolve({
+                    template:`<div>这是一个异步组件</div>`,
+                })
+            }, 4000);
+        });
+    })
+    app.component('async-common-item',AsyncCommonItem);
+
+    /* app.component('input-item',{
+        template:`
+            <input />
+        `,
+    });
+
+    app.component('common-item',{
+        template:`
+            <span> ooooooooooooooooo </span>
+        `,
+    }); */
+
+    const vm = app.mount('#root');
+</script>
+</html>
