@@ -1,0 +1,112 @@
+<!--
+ * @Description: 基础的 CSS 过渡与动画效果
+ * @Author: hairyOwl
+ * @Date: 2022-06-03 10:26:26
+ * @LastEditors: hairyOwl
+ * @LastEditTime: 2022-06-03 15:44:08
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>基础的 CSS 过渡与动画效果</title>
+    <script src="https://unpkg.com/vue@next"></script>
+    <style>
+        /* 关键帧的情况 横轴像素信息的改变*/
+        /* @keyframes leftToRight {
+            0%{
+                transform: translateX(-100px); 
+            }
+            50%{
+                transform: translateX(-50px); 
+            }
+            100%{
+                transform: translateX(0px); 
+            }
+        }
+        .animation{
+            animation: leftToRight 3s;
+        } */
+
+
+        /* 过渡  ease缓慢增速的效果 */
+        .transition{
+            transition: 3s background-color ease;
+        }
+        .blue{
+            background: rgb(131, 131, 215);
+            color: white;
+        }
+        .green{
+            background: rgb(116, 200, 116);
+            color: white;
+
+        }
+    </style>
+
+</head>
+<body>
+    <div id="root"></div>
+</body>
+<script>
+    // 过渡： 一个状态到另外一个状态(颜色)
+    // 动画: 一个元素运动的情况
+    const app = Vue.createApp({
+        data() {
+            return {
+                animate : {
+                    animation : false
+                },
+                transit:{
+                    transition : true,
+                    blue : true,
+                    green : false,
+                },
+                styleObj : {
+                    background : 'rgb(131, 131, 215)',
+                    color: 'white',
+                }
+            }
+        },
+        methods: {
+            handelClick(){
+                // 动画
+                // this.animate.animation = !this.animate.animation;
+                // 过渡 动态改变class
+                // this.transit.blue = !this.transit.blue 
+                // this.transit.green = !this.transit.green
+                // 过渡动态改变 style
+                if(this.styleObj.background === "rgb(131, 131, 215)"){
+                    this.styleObj.background = "rgb(116, 200, 116)";
+                }else{
+                    this.styleObj.background = "rgb(131, 131, 215)";
+                }
+            }
+        },
+        template:`
+            <div>
+                <div class="transition" :style="styleObj"> oooooo </div>
+                <button @click="handelClick">切换</button>
+            </div>`,
+
+        /* 
+            // 动画
+            <div>
+                <div :class="animate"> oooooo </div>
+                <button @click="handelClick">切换</button>
+            </div>
+            
+            //过渡 动态改变class
+            <div>
+                <div :class="transit"> oooooo </div>
+                <button @click="handelClick">切换</button>
+            </div>
+        */
+    });
+
+    const vm = app.mount('#root');
+
+</script>
+</html>
