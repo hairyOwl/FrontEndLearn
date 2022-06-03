@@ -1,0 +1,82 @@
+<!--
+ * @Description: 单元素组件的过渡和动画效果
+ * @Author: hairyOwl
+ * @Date: 2022-06-03 15:54:14
+ * @LastEditors: hairyOwl
+ * @LastEditTime: 2022-06-03 16:42:24
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>单元素组件的过渡和动画效果</title>
+    <script src="https://unpkg.com/vue@next"></script>
+    <style>
+        /* 出入场动画 */
+        @keyframes shake {
+            0%{
+                transform: translateX(-100px);
+            }
+            50%{
+                transform: translateX(-50px);
+            }
+            10%{
+                transform: translateX(50px);
+            }
+        }
+        .myTran-enter-active ,.myTran-leave-active{
+            animation: shake 3s;
+        }
+
+    </style>
+    <!-- 
+        出入场过渡效果
+        /* 入场 */
+        .v-enter-from{ /* 入场 初始状态 */
+            opacity: 0;
+        }
+        .v-enter-active , .v-leave-active{ /* 过渡效果 */
+            transition: opacity 1s ease-out;
+        }
+        .v-enter-to{ /* 入场 结束状态 */
+            opacity: 1;
+        }
+
+        /* 出场 */
+        .v-leave-from{  /* 出场 初始状态 */
+            opacity: 1;
+        }
+        .v-leave-to{ /* 出场 结束状态 */
+            opacity: 0;
+        }
+    -->
+</head>
+<body>
+    <div id="root"></div>
+</body>
+<script>
+    const app = Vue.createApp({
+        data() {
+            return {
+                show : false
+            }
+        },
+        methods: {
+            handleClick(){
+                this.show = !this.show;
+            }
+        },
+        template:`
+            <div>
+                <transition name="myTran">
+                    <div v-if="show">ooooooooo</div>
+                </transition>
+                <button @click="handleClick">显/隐</button>
+            </div>`,
+    });
+
+    const vm = app.mount('#root')
+</script>
+</html>
