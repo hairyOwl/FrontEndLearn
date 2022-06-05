@@ -1,0 +1,100 @@
+<!--
+ * @Description: 单元素组件的过渡和动画效果
+ * @Author: hairyOwl
+ * @Date: 2022-06-03 16:54:15
+ * @LastEditors: hairyOwl
+ * @LastEditTime: 2022-06-05 11:02:22
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- animate.css 第三方动画库引用 -->
+    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/> -->
+    <title>单元素组件的过渡和动画效果</title>
+    <script src="https://unpkg.com/vue@next"></script>
+    <style>
+        /* 出入场动画 */
+        @keyframes shake {
+            0%{
+                transform: translateX(-100px);
+            }
+            50%{
+                transform: translateX(-50px);
+            }
+            10%{
+                transform: translateX(50px);
+            }
+        }
+        .v-enter-from{
+            color: red;
+        }
+        .v-leave-to{
+            color: red;
+        }
+        .v-enter-active ,.v-leave-active{
+            animation: shake 3s;
+            transition: all 3s ease-in;
+        }
+
+    </style>
+    <!-- 
+        //修改前缀
+        .myTran-enter-active ,.myTran-leave-active{
+            animation: shake 3s;
+        }
+        //整体重命名
+        .hello ,.bye{
+            animation: shake 3s;
+        }
+    -->
+</head>
+<body>
+    <div id="root"></div>
+</body>
+<script>
+    const app = Vue.createApp({
+        data() {
+            return {
+                show : false
+            }
+        },
+        methods: {
+            handleClick(){
+                this.show = !this.show;
+            }
+        },
+        template:`
+            <div>
+                <transition >
+                    <div v-show="show">ooooooooo</div>
+                </transition>
+                <button @click="handleClick">显/隐</button>
+            </div>`,
+
+        /* 
+            // 前缀重命名 transition name="myTran" v-变为myTran-
+            <div>
+                <transition name="myTran">
+                    <div v-show="show">ooooooooo</div>
+                </transition>
+                <button @click="handleClick">显/隐</button>
+            </div>
+            // 整体重命名
+            <transition 
+                    enter-active-class="hello"
+                    leave-active-class="bye"
+            >
+            // 第三方动画引用
+            <transition 
+                    enter-active-class="animate__animated animate__flash"
+                    leave-active-class="animate__animated animate__bounce"
+            >
+        */
+    });
+
+    const vm = app.mount('#root')
+</script>
+</html>
