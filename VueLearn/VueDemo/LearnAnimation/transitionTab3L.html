@@ -1,0 +1,107 @@
+<!--
+ * @Description: 过渡和动画效果 时间控制 JS动画
+ * @Author: hairyOwl
+ * @Date:  2022-06-05 16:23:14
+ * @LastEditors: hairyOwl
+ * @LastEditTime: 2022-06-05 16:57:08
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- animate.css 第三方动画库引用 -->
+    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/> -->
+    <title>过渡和动画效果 时间控制 JS动画</title>
+    <script src="https://unpkg.com/vue@next"></script>
+    <!-- <style>
+        /* 出入场动画 */
+        @keyframes shake {
+            0%{
+                transform: translateX(-100px);
+            }
+            50%{
+                transform: translateX(-50px);
+            }
+            10%{
+                transform: translateX(50px);
+            }
+        }
+        .v-enter-from{
+            color: red;
+        }
+        .v-leave-to{
+            color: red;
+        }
+        .v-enter-active ,.v-leave-active{
+            animation: shake 10s;
+            transition: all 3s ease-in;
+        }
+    </style> -->
+</head>
+<body>
+    <div id="root"></div>
+</body>
+<script>
+    const app = Vue.createApp({
+        data() {
+            return {
+                show : false
+            }
+        },
+        methods: {
+            handleClick(){
+                this.show = !this.show;
+            },
+            handleBeforeEnter(el){ //入场开始前的那一瞬间
+                el.style.color= "red";
+            },
+            handleEnterActive(el , done){ //入场动画
+                // 每隔1s切换颜色
+                const animation = setInterval(()=>{
+                    const color = el.style.color;
+                    if(color === 'red'){
+                        el.style.color= "green";
+                    }else{
+                        el.style.color= "red";
+                    }
+                },1000);
+                // 停止颜色变换 
+                setTimeout(()=>{
+                    clearInterval(animation);
+                    done();
+                },3000);
+            },
+            handleEnterEnd(el){ //入场动画结束
+                alert(123);
+            }
+        },
+        template:`
+            <div>
+                <transition 
+                    :css="false"
+                    @before-enter = "handleBeforeEnter"
+                    @enter = "handleEnterActive"
+                    @after-enter = "handleEnterEnd"
+                >
+                    <div v-show="show">ooooooooo</div>
+                </transition>
+                <button @click="handleClick">显/隐</button>
+            </div>`,
+
+        /* 
+            // 规定以什么时间为主
+            <transition type="transition">
+            // 直接规定效果时间 毫秒为单位
+            <transition :duration="1000">
+            <transition :duration="{enter:1000,leave:3000}">
+            //js 做过渡和动画  钩子 某些时刻被调用的函数
+            // @after-enter 要搭配@enter(el,done) 中done
+            // @before-enter  @enter  @after-enter  @before-leave @leave @after-leave
+        */
+    });
+
+    const vm = app.mount('#root')
+</script>
+</html>
