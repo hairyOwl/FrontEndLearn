@@ -1,0 +1,70 @@
+<!--
+ * @Description: 多个组件和元素切换动画的实现
+ * @Author: hairyOwl
+ * @Date:  2022-06-06 10:25:42
+ * @LastEditors: hairyOwl
+ * @LastEditTime: 2022-06-06 11:05:22
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>状态动画</title>
+    <script src="https://unpkg.com/vue@next"></script>
+    <!-- 列表动画     -->
+    <!-- <style>
+        .v-enter-active,
+        .v-leave-active {
+        transition: all 0.5s ease;
+        }
+        .v-enter-from,
+        .v-leave-to {
+        opacity: 0;
+        transform: translateX(30px);
+        }
+    </style> -->
+</head>
+<body>
+    <div id="root"></div>
+</body>
+<script>
+    const app = Vue.createApp({
+        data() {
+            return {
+                myList:[1,2,3],
+                num : 1,
+                animateNum : 1,
+            }
+        },
+        methods: {
+            handleClick(){
+                // this.myList.unshift(this.myList.length+1);  
+                this.num = 10;
+                this.animateNum = 1;
+                const timer = setInterval(()=>{
+                    this.animateNum += 1;
+                    if(this.animateNum === 10){
+                        clearInterval(timer);
+                    }
+                },100);
+            },
+        },
+        template:`
+            <div>
+                <div> {{ animateNum }} </div>
+                <button @click="handleClick">增加</button>
+            </div>`,
+        
+        /* 
+            // 列表动画
+            <transition-group >
+                <span class="list-item" v-for="item in myList" :key="item">{{ item }}</span>
+            </transition-group>
+        */
+    });
+
+    const vm = app.mount('#root')
+</script>
+</html>
