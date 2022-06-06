@@ -1,0 +1,90 @@
+<!--
+ * @Description: 多个组件和元素切换动画的实现
+ * @Author: hairyOwl
+ * @Date:  2022-06-05 21:43:58
+ * @LastEditors: hairyOwl
+ * @LastEditTime: 2022-06-06 10:23:31
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- animate.css 第三方动画库引用 -->
+    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/> -->
+    <title>多个组件和元素切换动画的实现</title>
+    <script src="https://unpkg.com/vue@next"></script>
+    <style>
+        .v-enter-from,.v-leave-to{
+            opacity: 0;
+        }
+        .v-enter-to,.v-leave-from{
+            opacity: 1;
+        }
+        .v-enter-active,.v-leave-active{
+            transition: opacity 1s ease-in;
+        }
+
+    </style>
+</head>
+<body>
+    <div id="root"></div>
+</body>
+<script>
+    // 局部组件
+    const componentA = {
+        template:`<div>ooooooooo</div>`,
+    }
+
+    const componentB = {
+        template:`<div>vvvvvvvvvvv</div>`,
+    }
+
+    const app = Vue.createApp({
+        data() {
+            return {
+                show : false,
+                component : 'component-a',
+            }
+        },
+        components:{
+            'component-a' : componentA,
+            'component-b' : componentB,
+        },
+        methods: {
+            handleClick(){
+                // this.show = !this.show;
+                (this.component==='component-a')?this.component='component-b':this.component='component-a';
+            },
+        },
+        template:`
+            <div>
+                <transition mode="out-in" appear>
+                    <component :is="component" />
+                </transition>
+                <button @click="handleClick">切换</button>
+            </div>`,
+        /* 
+            // 多个单元素标签之间的切换
+            // 先出场再入场 in-out appear一开始刷新就有动画
+            <transition mode="out-in" appear>
+            <div>
+                <transition mode="out-in" appear>
+                    <div v-if="show">ooooooooo</div>
+                    <div v-else="show">vvvvvvvvvvv</div>
+                </transition>
+                <button @click="handleClick">切换</button>
+            </div>
+
+            // 多个组件之间的切换
+            <transition mode="out-in" appear>
+                <component-a v-if="show" />
+                <component-b v-else="show" />
+            </transition>
+        */
+    });
+
+    const vm = app.mount('#root')
+</script>
+</html>
