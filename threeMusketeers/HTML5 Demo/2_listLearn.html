@@ -1,23 +1,18 @@
 <!--
- * @description: 
- * @author: hairyOwl
- * @date: Do not edit
- * @lastEditors: hairyOwl
- * @lastEditTime: Do not edit
--->
-<!--
- * @description: 列表 无序有序定义
- * @author: hairyOwl
- * @date: Do not edit
- * @lastEditors: hairyOwl
- * @lastEditTime: Do not edit
+author:        hairyOwl 
+date:          2023-01-08 21:31:44
+lastModified  2023-01-08 21:31:44
+Copyright © owl All rights reserved
 -->
 <!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=0"
+    />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>列表练习</title>
   </head>
   <body>
@@ -33,7 +28,7 @@
         <li>鸡蛋</li>
         <li>水果</li>
       </ul>
-      <h3>无序列表-列表的嵌套</h3>
+      <p>无序列表-列表的嵌套</p>
       <!-- ①li不能散着放 ②ul的子标签只能是li ③li里面可以放任何东西 -->
       <ul>
         <li>
@@ -55,12 +50,47 @@
       </ul>
     </div>
 
+    <!-- 有序列表 -->
     <div>
-      <p>有序列表</p>
+      <h3>有序列表</h3>
+      <ol type="a" start="26">
+        <li>张三</li>
+        <li>王五</li>
+        <li>赵六</li>
+      </ol>
+      <ol type="a" reversed>
+        <li>张三</li>
+        <li>王五</li>
+        <li>赵六</li>
+      </ol>
     </div>
 
+    <!-- 定义列表 -->
     <div>
-      <p>定义列表</p>
+      <h3>定义列表</h3>
+      <!-- 一个dl 交替出现dt,dd -->
+      <dl>
+        <dt>HTML</dt>
+        <dd>超文本标记语言</dd>
+        <dt>CSS</dt>
+        <dd>层叠式样式表</dd>
+        <dt>JavaScript</dt>
+        <dd>脚本程序</dd>
+      </dl>
+
+      <!-- 一个dl 不交替出现dt,dd -->
+      <dl>
+        <dt>服饰</dt>
+        <dd>T恤、羽绒服、牛仔裤</dd>
+      </dl>
+      <dl>
+        <dt>日用品</dt>
+        <dd>牙膏、洗衣粉、牙刷</dd>
+      </dl>
+      <dl>
+        <dt>电子产品</dt>
+        <dd>手机、电脑、键盘</dd>
+      </dl>
     </div>
   </body>
 </html>
